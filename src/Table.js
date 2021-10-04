@@ -18,6 +18,9 @@ const TableBody = (props) => {
             <tr key={index}>
                 <td>{row.name}</td>
                 <td>{row.job}</td>
+                <td>
+                    <button onClick={() => props.removeCharacter(index)}>Delete</button>
+                </td>
             </tr>
         )
     });
@@ -25,17 +28,17 @@ const TableBody = (props) => {
 }
 
 // class components: classes with a render method and the render method returns JSX
-class Table extends Component {
-    render() {
-        const { characterData } = this.props;
+// note: it is generally best practice to have components that require having states
+// be class components and all other components be simple components.
+const Table = (props) => {
+    const { characterData, removeCharacter } = props;
 
-        return (
-            <table>
-                <TableHeader />
-                <TableBody characterData={characterData} />
-            </table>
-        );
-    }
+    return (
+        <table>
+            <TableHeader />
+            <TableBody characterData={characterData} removeCharacter={removeCharacter} />
+        </table>
+    );
 }
 
 export default Table;
